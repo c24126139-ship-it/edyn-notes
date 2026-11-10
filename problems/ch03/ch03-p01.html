@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ch03-p01 點電荷與接地無限大導體平面（鏡像法） | 電動力學解題筆記</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script src="../../assets/mathjax-config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body data-id="ch03-p01" data-root="../../">
+  <div class="site-bar"><div class="inner"><a href="../../index.html">電動力學解題筆記</a><span>ch03-p01</span></div></div>
+  <main>
+    <header>
+      <h1>點電荷與接地無限大導體平面（鏡像法）</h1>
+      <p class="meta">第 3 章 位勢的求法 ｜ 來源：範例題 ｜ 難度：★★</p>
+      <ul class="tags"><li>method-of-images</li><li>conductor</li><li>boundary-condition</li><li>force</li></ul>
+    </header>
+
+    <section class="problem">
+      <h2>題目</h2>
+      <p>點電荷 \(q\) 位於接地無限大導體平面（\(z=0\)）上方，距離為 \(d\)。求 \(z&gt;0\) 區域的電位、導體表面的感應面電荷密度 \(\sigma\)、總感應電荷，以及 \(q\) 受到的力。</p>
+      <p><strong>已知：</strong>\(q\) 在 \((0,0,d)\)，平面 \(V=0\)　<strong>求：</strong>\(V(x,y,z)\)、\(\sigma(x,y)\)、\(Q_{\text{ind}}\)、\(\vb{F}\)</p>
+    </section>
+
+    <section class="idea">
+      <h2>思路</h2>
+      <p>邊界條件是 \(z=0\) 時 \(V=0\)，以及 \(r\to\infty\) 時 \(V\to 0\)。直接解 Poisson 方程很難，但若在 \((0,0,-d)\) 放一個假想的鏡像電荷（image charge）\(-q\)，兩電荷在 \(z=0\) 平面上剛好抵消，邊界條件就自動滿足。</p>
+      <p>依唯一性定理（uniqueness theorem），在 \(z&gt;0\) 區域中，這個「兩電荷」的電位就是正確答案。感應電荷由 \(\sigma = -\epsilon_0\,\partial V/\partial n\) 求出。</p>
+    </section>
+
+    <section class="derivation">
+      <h2>推導</h2>
+      <h3>Step 1　寫出電位</h3>
+      <p>真實電荷 \(q\) 加上鏡像電荷 \(-q\)：</p>
+      \[ V(x,y,z) = \kk\left[\frac{q}{\sqrt{x^2+y^2+(z-d)^2}} - \frac{q}{\sqrt{x^2+y^2+(z+d)^2}}\right], \qquad z \ge 0 \]
+      <p>代入 \(z=0\)：兩項分母相同，\(V=0\)，邊界條件成立。</p>
+
+      <h3>Step 2　感應面電荷密度</h3>
+      <p>導體表面的法向量是 \(+\vu{z}\)，所以 \(\sigma = -\epsilon_0 \left.\dfrac{\partial V}{\partial z}\right|_{z=0}\)：</p>
+      \[ \begin{aligned}
+        \frac{\partial V}{\partial z}
+          &amp;= \kk\left[\frac{-q\,(z-d)}{\left(x^2+y^2+(z-d)^2\right)^{3/2}} + \frac{q\,(z+d)}{\left(x^2+y^2+(z+d)^2\right)^{3/2}}\right] \\
+        \left.\frac{\partial V}{\partial z}\right|_{z=0}
+          &amp;= \kk\,\frac{2qd}{\left(x^2+y^2+d^2\right)^{3/2}}
+      \end{aligned} \]
+      \[ \sigma(x,y) = -\frac{q\,d}{2\pi\left(x^2+y^2+d^2\right)^{3/2}} \]
+
+      <h3>Step 3　總感應電荷</h3>
+      <p>用極座標 \(s^2 = x^2+y^2\)，面積元素 \(\dd{a} = 2\pi s\dd{s}\)：</p>
+      \[ Q_{\text{ind}} = \int_0^\infty \frac{-q\,d}{2\pi (s^2+d^2)^{3/2}}\,2\pi s\dd{s}
+        = -q\,d\left[-\frac{1}{\sqrt{s^2+d^2}}\right]_0^\infty
+        = -q\,d\cdot\frac{1}{d} = -q \]
+
+      <h3>Step 4　\(q\) 受到的力</h3>
+      <p>\(z&gt;0\) 區域的電場與「兩電荷系統」完全相同，所以 \(q\) 受的力就是鏡像電荷對它的庫倫力，兩者相距 \(2d\)：</p>
+      \[ \vb{F} = \kk\,\frac{q\,(-q)}{(2d)^2}\,\vu{z} = -\kk\,\frac{q^2}{4d^2}\,\vu{z} \]
+    </section>
+
+    <section class="result">
+      <h2>結果</h2>
+      <div class="answer">
+        \[ \boxed{\begin{aligned}
+          V &amp;= \frac{q}{4\pi\epsilon_0}\left[\frac{1}{\sqrt{x^2+y^2+(z-d)^2}} - \frac{1}{\sqrt{x^2+y^2+(z+d)^2}}\right] \\
+          \sigma &amp;= -\frac{q\,d}{2\pi\,(x^2+y^2+d^2)^{3/2}}, \qquad Q_{\text{ind}} = -q \\
+          \vb{F} &amp;= -\frac{1}{4\pi\epsilon_0}\frac{q^2}{4d^2}\,\vu{z}
+        \end{aligned}} \]
+      </div>
+    </section>
+
+    <section class="check">
+      <h2>檢查</h2>
+      <ul>
+        <li><strong>邊界條件：</strong>\(z=0\) 時 \(V=0\)；\(r\to\infty\) 時 \(V\to 0\)，兩者都成立。</li>
+        <li><strong>總電荷：</strong>\(Q_{\text{ind}} = -q\)。從遠處看，「\(q\) 加上平面」整體像一個電偶極，淨電荷為零，合理。</li>
+        <li><strong>符號：</strong>力指向 \(-\vu{z}\)，也就是 \(q\) 被導體吸過去，符合「導體會吸引帶電體」的經驗。\(\sigma\) 和 \(q\) 異號，且在正下方（\(s=0\)）最大，也合理。</li>
+        <li><strong>注意（常見錯誤）：</strong>把 \(q\) 從 \(d\) 移到無窮遠所需的功是 \(\kk\,q^2/(4d)\)，<em>不是</em>兩電荷系統的位能 \(\kk\,q^2/(2d)\)。因為導體只有 \(z&gt;0\) 一半空間有電場，能量只有一半。</li>
+      </ul>
+    </section>
+  </main>
+  <script src="../../data/problems.js"></script>
+  <script src="../../assets/site.js"></script>
+</body>
+</html>
