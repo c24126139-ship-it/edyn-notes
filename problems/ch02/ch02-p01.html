@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ch02-p01 均勻帶電實心球的電場與電位 | 電動力學解題筆記</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script src="../../assets/mathjax-config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body data-id="ch02-p01" data-root="../../">
+  <div class="site-bar"><div class="inner"><a href="../../index.html">電動力學解題筆記</a><span>ch02-p01</span></div></div>
+  <main>
+    <header>
+      <h1>均勻帶電實心球的電場與電位</h1>
+      <p class="meta">第 2 章 靜電學 ｜ 來源：範例題 ｜ 難度：★</p>
+      <ul class="tags"><li>gauss-law</li><li>potential</li><li>spherical-symmetry</li></ul>
+    </header>
+
+    <section class="problem">
+      <h2>題目</h2>
+      <p>一顆半徑 \(R\) 的實心球，總電荷 \(Q\) 均勻分布在整個體積內。求空間中每一點的電場 \(\vb{E}(r)\)，以及取無窮遠為零點時的電位 \(V(r)\)。</p>
+      <p><strong>已知：</strong>\(R,\ Q\)，電荷密度 \(\rho = \dfrac{3Q}{4\pi R^3}\)　<strong>求：</strong>\(\vb{E}(r)\)、\(V(r)\)（\(r&lt;R\) 與 \(r&gt;R\)）</p>
+    </section>
+
+    <section class="idea">
+      <h2>思路</h2>
+      <p>電荷分布具有球對稱（spherical symmetry），所以 \(\vb{E}\) 只能沿徑向、大小只跟 \(r\) 有關，正好可以用高斯定律（Gauss's law）一行解出。取同心球面當高斯面，分成球內、球外兩種情況。</p>
+      <p>電位則用 \(V(r) = -\int_{\infty}^{r} \vb{E}\cdot \dd{\vb{l}}\) 從無窮遠積分進來；球內的點要「分段」積分，先經過球外區域再進入球內。</p>
+    </section>
+
+    <section class="derivation">
+      <h2>推導</h2>
+      <h3>Step 1　球外 \(r &gt; R\)</h3>
+      <p>高斯面包住全部電荷 \(Q\)：</p>
+      \[ E\,(4\pi r^2) = \frac{Q}{\epsilon_0} \quad\Longrightarrow\quad \vb{E} = \kk\,\frac{Q}{r^2}\,\vu{r} \]
+
+      <h3>Step 2　球內 \(r &lt; R\)</h3>
+      <p>高斯面只包住半徑 \(r\) 內的電荷，比例是體積比 \((r/R)^3\)：</p>
+      \[ Q_{\text{enc}} = Q\,\frac{r^3}{R^3}
+         \quad\Longrightarrow\quad
+         E\,(4\pi r^2) = \frac{Q r^3}{\epsilon_0 R^3}
+         \quad\Longrightarrow\quad
+         \vb{E} = \kk\,\frac{Q\,r}{R^3}\,\vu{r} \]
+
+      <h3>Step 3　球外的電位</h3>
+      \[ V(r) = -\int_{\infty}^{r} \kk\frac{Q}{r'^2}\dd{r'} = \kk\,\frac{Q}{r}, \qquad r \ge R \]
+
+      <h3>Step 4　球內的電位（分段積分）</h3>
+      <p>從無窮遠先積到 \(R\)（用球外電場），再從 \(R\) 積到 \(r\)（用球內電場）：</p>
+      \[ \begin{aligned}
+        V(r) &amp;= -\int_{\infty}^{R} \kk\frac{Q}{r'^2}\dd{r'} \;-\; \int_{R}^{r} \kk\frac{Q\,r'}{R^3}\dd{r'} \\
+             &amp;= \kk\frac{Q}{R} \;-\; \kk\frac{Q}{2R^3}\left(r^2 - R^2\right) \\
+             &amp;= \kk\,\frac{Q}{2R}\left(3 - \frac{r^2}{R^2}\right)
+      \end{aligned} \]
+    </section>
+
+    <section class="result">
+      <h2>結果</h2>
+      <div class="answer">
+        \[ \boxed{\;
+          \vb{E}(r) = \begin{cases}
+            \dfrac{1}{4\pi\epsilon_0}\dfrac{Q\,r}{R^3}\,\vu{r}, &amp; r &lt; R \\[2ex]
+            \dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r^2}\,\vu{r}, &amp; r &gt; R
+          \end{cases}
+          \qquad
+          V(r) = \begin{cases}
+            \dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{2R}\left(3 - \dfrac{r^2}{R^2}\right), &amp; r \le R \\[2ex]
+            \dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r}, &amp; r \ge R
+          \end{cases}
+        \;} \]
+      </div>
+    </section>
+
+    <section class="check">
+      <h2>檢查</h2>
+      <ul>
+        <li><strong>邊界連續：</strong>\(r = R\) 時兩段電場都等於 \(\kk\,Q/R^2\)，兩段電位都等於 \(\kk\,Q/R\)。體電荷沒有面電荷，所以 \(\vb{E}\) 和 \(V\) 都應該連續，結果符合。</li>
+        <li><strong>極限：</strong>\(r \to 0\) 時 \(\vb{E} \to 0\)，因為球心處各方向的貢獻互相抵消；球心電位 \(V(0) = \tfrac{3}{2}\,\kk\,Q/R\)，是表面電位的 1.5 倍，比表面高，合理（\(Q&gt;0\) 時電場向外，電位往內遞增）。</li>
+        <li><strong>微分驗證：</strong>\(-\dfrac{dV}{dr} = \kk\dfrac{Q}{2R}\cdot\dfrac{2r}{R^2} = \kk\dfrac{Q\,r}{R^3}\)，和 Step 2 的球內電場一致。</li>
+        <li><strong>因次：</strong>\(\kk\,Q/r^2\) 的單位是 N/C，\(\kk\,Q/r\) 的單位是 V，兩者都正確。</li>
+      </ul>
+    </section>
+  </main>
+  <script src="../../data/problems.js"></script>
+  <script src="../../assets/site.js"></script>
+</body>
+</html>
